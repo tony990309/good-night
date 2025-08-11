@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    environment:
+      - POSTGRES_PASSWORD=P@ssw0rd
+      - POSTGRES_DB=good_night_development
+    volumes:
+      - postgres-data:/var/lib/postgresql/data:z
+    restart: always
+  good_night_server:
+    image: good-night-server:latest
+    command: bash -c "rake db:prepare && puma -C config/puma.rb"
+    volumes:
+      - .:/good-night
+    env_file:
+      - ./backend-local.env
+    depends_on:
+      - postgres
+    ports:
+      - 3000:3000
+    restart: always
+volumes:
+  postgres-data:
