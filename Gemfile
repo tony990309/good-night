@@ -25,8 +25,12 @@ gem 'thruster', require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem 'rack-cors'
 
+# Service Base
+gem 'service_caller', '~> 1.2.2'
 # Error Response
 gem 'error_response', '~> 1.1.3'
+# Serialize response
+gem 'grape-entity', '~> 1.0.1'
 
 # Generate postman doc after run rspec
 gem 'rpdoc', '~> 0.2.5'
