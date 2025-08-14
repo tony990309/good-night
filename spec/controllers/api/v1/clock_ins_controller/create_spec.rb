@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ClockInsController, type: :request do
-  # include_context 'rpdoc'
+  include_context 'rpdoc'
 
   before(:each) do |example|
     example.metadata[:rpdoc_action_key] = 'create'

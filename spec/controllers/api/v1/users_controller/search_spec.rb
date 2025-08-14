@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :request do
+  include_context 'rpdoc'
+
   before(:each) do |example|
     example.metadata[:rpdoc_action_key] = 'search'
     example.metadata[:rpdoc_action_name] = '搜尋使用者'
@@ -11,7 +13,7 @@ RSpec.describe Api::V1::UsersController, type: :request do
   end
 
   describe '#search' do
-    it 'returns users matching the search term' do
+    it 'should return 200 and get users matching the search term', rpdoc_example_key: 200, rpdoc_example_name: 'search user success' do
       FactoryBot.create(:user, name: 'Alice')
       FactoryBot.create(:user, name: 'Bob')
       params = { term: 'ali' }

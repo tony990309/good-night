@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::UsersController, type: :request do
+  include_context 'rpdoc'
+
   before(:each) do |example|
     example.metadata[:rpdoc_action_key] = 'show'
     example.metadata[:rpdoc_action_name] = '取得使用者資訊'
