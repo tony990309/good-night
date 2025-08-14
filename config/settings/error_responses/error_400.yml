@@ -1,11 +1,12 @@
+need_more_information:
+  error_code: 400_000
+  error_message: some columns should not be null
 invalid_clock_in_action:
   error_code: 400_001
   error_message: clock-in action_type only accept sleep or wake
 user_is_sleeping:
-  error_code: 400_101
+  error_code: 400_100
   error_message: user is sleeping
 user_is_awake:
-  error_code: 400_102
+  error_code: 400_101
   error_message: user is awake
-
-  

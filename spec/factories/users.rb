@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :user do
-    name { 'user' }
+    sequence :name do |n|
+      { name: "user #{n}" }
+    end
 
     trait :create_sleeping_duration do
       name { 'sleeping_user' }

@@ -1,5 +1,4 @@
 require 'rails_helper'
-# require 'support/request_helper'
 
 RSpec.describe Api::V1::ClockInsController, type: :request do
   # include_context 'rpdoc'
@@ -43,24 +42,24 @@ RSpec.describe Api::V1::ClockInsController, type: :request do
       expect(sleeping_user.reload.awake?).to be(true)
     end
 
-    it 'should return 400_101 if clock in with action_type sleep while user is already sleeping', rpdoc_example_key: 400_101, rpdoc_example_name: 'clock in failed (user is already sleeping)' do
+    it 'should return 400_100 if clock in with action_type sleep while user is already sleeping', rpdoc_example_key: 400_100, rpdoc_example_name: 'clock in failed (user is already sleeping)' do
       sleeping_user = FactoryBot.create(:sleeping_user)
       @params[:user_id] = sleeping_user.id
       post @path, params: @params.to_json, headers: @headers
 
       expect(response).to have_http_status(400)
-      expect(json['error_code']).to eq(400_101)
+      expect(json['error_code']).to eq(400_100)
       expect(json['error_key']).to eq('user_is_sleeping')
     end
 
-    it 'should return 400_102 if clock in with action_type wake while user is already awake', rpdoc_example_key: 400_102, rpdoc_example_name: 'clock in failed (user is already awake)' do
+    it 'should return 400_101 if clock in with action_type wake while user is already awake', rpdoc_example_key: 400_101, rpdoc_example_name: 'clock in failed (user is already awake)' do
       awake_user = FactoryBot.create(:awake_user)
       @params[:user_id] = awake_user.id
       @params[:action_type] = 'wake'
       post @path, params: @params.to_json, headers: @headers
 
       expect(response).to have_http_status(400)
-      expect(json['error_code']).to eq(400_102)
+      expect(json['error_code']).to eq(400_101)
       expect(json['error_key']).to eq('user_is_awake')
     end
   end
