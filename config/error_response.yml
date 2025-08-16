@@ -1,0 +1,4 @@
+source:
+  local:
+    - config/settings/error_responses/error_400.yml
+    - config/settings/error_responses/error_404.yml

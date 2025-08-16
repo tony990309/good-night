@@ -1,0 +1,3 @@
+user_not_found:
+  error_code: 404_001
+  error_message: user not found
