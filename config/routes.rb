@@ -3,7 +3,14 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users, only: [:index, :show, :create], param: :user_id do
         collection do
-          get 'search', to: 'users#search'
+          get 'search'
+        end
+      end
+
+      namespace :users do
+        scope module: :follow do
+          post 'follow'
+          post 'unfollow'
         end
       end
 

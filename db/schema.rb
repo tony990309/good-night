@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_13_073018) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_16_084222) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_13_073018) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_clock_ins_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "following_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id", "following_id"], name: "index_follows_on_follower_id_and_following_id", unique: true
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["following_id"], name: "index_follows_on_following_id"
   end
 
   create_table "sleep_durations", force: :cascade do |t|
@@ -41,5 +51,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_13_073018) do
   end
 
   add_foreign_key "clock_ins", "users"
+  add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "follows", "users", column: "following_id"
   add_foreign_key "sleep_durations", "users"
 end

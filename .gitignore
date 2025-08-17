@@ -33,3 +33,6 @@
 
 # Ignore rpdoc files
 /rpdoc/**/*.json
+
+# Ignore vs code files
+/.vscode/
