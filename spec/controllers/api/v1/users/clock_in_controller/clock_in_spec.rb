@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::ClockInsController, type: :request do
+RSpec.describe Api::V1::Users::ClockInController, type: :request do
   include_context 'rpdoc'
 
   before(:each) do |example|
-    example.metadata[:rpdoc_action_key] = 'create'
+    example.metadata[:rpdoc_action_key] = 'clock_in'
     example.metadata[:rpdoc_action_name] = '建立打卡紀錄'
-    example.metadata[:rpdoc_example_folders] = ['v1', 'clock_ins']
+    example.metadata[:rpdoc_example_folders] = ['v1', 'users', 'clock_in']
 
     @headers = { 'Content-Type' => 'application/json' }
-    @path = "/api/v1/clock_ins"
+    @path = "/api/v1/users/clock_in"
   end
 
-  describe '#create' do
+  describe '#clock_in' do
     before(:each) do
       @user = FactoryBot.create(:user)
       @params = {
