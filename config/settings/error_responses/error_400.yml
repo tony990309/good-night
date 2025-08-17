@@ -10,3 +10,6 @@ user_is_sleeping:
 user_is_awake:
   error_code: 400_101
   error_message: user is awake
+invalid_following_target:
+  error_code: 400_200
+  error_message: invalid following target
