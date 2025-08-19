@@ -32,6 +32,9 @@ gem 'error_response', '~> 1.1.3'
 # Serialize response
 gem 'grape-entity', '~> 1.0.1'
 
+# Pagination
+gem 'kaminari', '~> 1.2.2'
+
 # Generate postman doc after run rspec
 gem 'rpdoc', '~> 0.2.5'
 

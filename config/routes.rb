@@ -17,6 +17,8 @@ Rails.application.routes.draw do
           post 'clock_in'
         end
       end
+
+      resources :sleep_durations, only: [:index]
     end
   end
 end
