@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  validates :name, presence: true, uniqueness: true
-
   has_many :clock_ins, dependent: :destroy
   has_many :sleep_durations, dependent: :destroy
   has_one :sleeping_duration, -> { sleeping }, class_name: 'SleepDuration'
