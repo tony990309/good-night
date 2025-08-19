@@ -12,9 +12,13 @@ Rails.application.routes.draw do
           post 'follow'
           post 'unfollow'
         end
+
+        scope module: :clock_in do
+          post 'clock_in'
+        end
       end
 
-      resources :clock_ins, only: [:create]
+      resources :sleep_durations, only: [:index]
     end
   end
 end

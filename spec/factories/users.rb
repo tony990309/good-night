@@ -21,7 +21,15 @@ FactoryBot.define do
       end
     end
 
+    trait :create_two_following_users do
+      after(:create) do |user|
+        user.following << create(:sleeping_user)
+        user.following << create(:awake_user)
+      end
+    end
+
     factory :sleeping_user, traits: [:create_sleeping_duration]
     factory :awake_user, traits: [:create_awake_duration]
+    factory :two_following_user, traits: [:create_two_following_users]
   end
 end
