@@ -8,10 +8,6 @@ class SleepDuration < ApplicationRecord
 
   PER_PAGE = 20
 
-  def self.setup_for(user)
-    user.sleeping_duration || create(user_id: user.id)
-  end
-
   private
 
   def calculate_duration

@@ -17,6 +17,6 @@ module User::Followable
   end
 
   def following?(user)
-    following.include?(user)
+    active_follows.exists?(following_id: user.id)
   end
 end
