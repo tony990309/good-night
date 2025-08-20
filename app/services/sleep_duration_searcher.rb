@@ -3,6 +3,7 @@ class SleepDurationSearcher < ServiceCaller
   def initialize(user, search_params, pagination_params)
     @user = user
     @search_params = search_params
+    @target = search_params[:target] || 'following'
     @page = pagination_params[:page] || 1
     @per_page = pagination_params[:per_page] || SleepDuration::PER_PAGE
   end
@@ -16,12 +17,10 @@ class SleepDurationSearcher < ServiceCaller
   private
 
   def setup_target_users
-    case @search_params[:target]
+    case @target
     when 'following'
       @target_users = @user.following
     when 'self'
-      @target_users = @user
-    else
       @target_users = @user
     end
   end

@@ -8,12 +8,12 @@ module User::Followable
     has_many :followers, through: :passive_follows, source: :follower
   end
 
-  def follow(following_user)
-    following << following_user unless following?(following_user)
+  def follow(user)
+    following << user unless following?(user)
   end
 
-  def unfollow(following_user)
-    following.delete(following_user)
+  def unfollow(user)
+    following.delete(user)
   end
 
   def following?(user)
