@@ -18,15 +18,17 @@ class ClockIns::Creator < ServiceCaller
   end
 
   def clock_in
-    clock_in_record = ClockIn.create_from_request(@user.id, @action_type)
-    clock_in_time = clock_in_record.created_at
-    sleeping_duration = SleepDuration.setup_for(@user)
+    ActiveRecord::Base.transaction do
+      clock_in_record = ClockIn.create_from_request(@user.id, @action_type)
+      clock_in_time = clock_in_record.created_at
+      sleeping_duration = SleepDuration.setup_for(@user)
 
-    case @action_type
-    when 'sleep'
-      sleeping_duration.update(start_time: clock_in_time)
-    when 'wake'
-      sleeping_duration.update(end_time: clock_in_time)
+      case @action_type
+      when 'sleep'
+        sleeping_duration.update(start_time: clock_in_time)
+      when 'wake'
+        sleeping_duration.update(end_time: clock_in_time)
+      end
     end
   end
 

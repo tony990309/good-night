@@ -9,7 +9,7 @@ class SleepDuration < ApplicationRecord
   PER_PAGE = 20
 
   def self.setup_for(user)
-    sleeping.last || create(user_id: user.id)
+    user.sleeping_duration || create(user_id: user.id)
   end
 
   private

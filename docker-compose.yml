@@ -13,7 +13,7 @@ services:
     volumes:
       - .:/good-night
     env_file:
-      - ./backend-local.env
+      - ./backend.env
     depends_on:
       - postgres
     ports:
