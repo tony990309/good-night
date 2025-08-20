@@ -30,7 +30,7 @@ Rpdoc.configure do |config|
   # config.rpdoc_request_filename = 'request.json'
 
   # (Optional) Filename to store Postman description markdown data.
-  # config.rpdoc_description_filename = 'description.md'
+  config.rpdoc_description_filename = 'description.md'
 
   # (Optional) Filename to store RSpec collection json data.
   # config.rpdoc_collection_filename = 'collection.json'
@@ -40,7 +40,7 @@ Rpdoc.configure do |config|
   config.rpdoc_clean_empty_folders_except = ['Schemas']
 
   # (Optional) Auto push collection to Postman server or not.
-  config.rpdoc_auto_push = false
+  # config.rpdoc_auto_push = true
 
   # (Optional) Auto push strategy, including :push_and_create and :push_and_update
   config.rpdoc_auto_push_strategy = :push_and_update
