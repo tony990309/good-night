@@ -9,29 +9,38 @@ class SleepDurationSearcher < ServiceCaller
   end
 
   def call
-    setup_target_users
     search_by_conditions
-    @result = @sleep_durations
   end
 
   private
 
-  def setup_target_users
-    case @target
-    when 'following'
-      @target_users = @user.following
-    when 'self'
-      @target_users = @user
-    end
+  def search_by_conditions
+    search_by_date_range
+    search_by_target
+
+    @result = @sleep_durations
+      .includes(:user)
+      .order(duration: :desc)
+      .page(@page)
+      .per(@per_page)
   end
 
-  def search_by_conditions
-    @sleep_durations = SleepDuration.awake.where(user: @target_users)
-
+  def search_by_date_range
     date_range = format_time_range
-    @sleep_durations = @sleep_durations.where(start_time: date_range)
+    @sleep_durations = SleepDuration.awake
+      .where(start_time: date_range)
+  end
 
-    @sleep_durations = @sleep_durations.includes(:user).order(duration: :desc).page(@page).per(@per_page)
+  def search_by_target
+    case @target
+    when 'following'
+      @sleep_durations = @sleep_durations
+        .joins("INNER JOIN follows ON follows.following_id = sleep_durations.user_id")
+        .where(follows: { follower_id: @user.id })
+    when 'self'
+      @sleep_durations = @sleep_durations
+        .where(user_id: @user.id)
+    end
   end
 
   def format_time_range
